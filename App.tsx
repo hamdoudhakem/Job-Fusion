@@ -1,13 +1,15 @@
 import { StatusBar } from "expo-status-bar";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./screens/Home";
-import Search from "./screens/Search";
-import { COLORS, icons, images, SIZES } from "./constants";
-import { ScreenHeaderBtn } from "./components";
-import { useCallback } from "react";
+import Home from "./src/screens/Home";
+import Search from "./src/screens/Search";
+import JobDetails from "./src/screens/JobDetails";
+import { COLORS, icons, images, SIZES } from "./src/constants";
+import { ScreenHeaderBtn } from "./src/components";
+import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
+import { ActivityIndicator, Text } from "react-native";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -20,7 +22,7 @@ export default function App() {
     DMRegular: require("./assets/fonts/DMSans-Regular.ttf"),
   });
 
-  const onLayoutRootView = useCallback(() => {
+  useEffect(() => {
     console.log("fontsLoaded is", fontsLoaded);
     if (fontsLoaded) {
       SplashScreen.hideAsync();
@@ -28,7 +30,7 @@ export default function App() {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return null;
+    return <ActivityIndicator size={"large"} color={"purple"} />;
   }
 
   return (
@@ -36,7 +38,6 @@ export default function App() {
       <StatusBar style="dark" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Search" component={Search} />
           <Stack.Screen
             name="Home"
             component={Home}
@@ -52,6 +53,8 @@ export default function App() {
               headerTitle: () => "",
             }}
           />
+          <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="JobDetails" component={JobDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
