@@ -6,9 +6,10 @@ JobFusion is a React Native application that helps users find new job opportunit
 
 ## Features
 
-- Search functionality to find job listings
-- Integration with multiple job-seeking platforms
-- Redirect to original job postings for application
+- **Job Aggregation**: Fetches job listings from multiple popular job-seeking sites.
+- **Search Functionality**: Allows users to search for specific job listings.
+- **Easy Application**: Redirects users to the respective job listing site to apply.
+- **User-Friendly Interface**: Simple and intuitive design for a seamless job-seeking experience.
 
 ## Screenshots
 
@@ -30,8 +31,6 @@ Here are some screenshots showcasing the main features of JobFusion:
 
 Before you begin, ensure you have met the following requirements:
 * You have installed the latest version of [Node.js and npm](https://nodejs.org/en/download/)
-* You have a RapidAPI account (free tier is sufficient)
-* You have subscribed to the [JSearch API on RapidAPI](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch)
 
 ## Installation
 
