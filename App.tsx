@@ -62,7 +62,19 @@ export default function App() {
               headerTitle: "",
             }}
           />
-          <Stack.Screen name="JobDetails" component={JobDetails} />
+          <Stack.Screen
+            name="JobDetails"
+            component={JobDetails}
+            options={{
+              headerStyle: { backgroundColor: COLORS.lightWhite },
+              headerShadowVisible: false,
+              headerBackVisible: false,
+              headerRight: () => (
+                <ScreenHeaderBtn iconUrl={icons.share} dimension="60%" />
+              ),
+              headerTitle: "",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
