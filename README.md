@@ -16,16 +16,16 @@ JobFusion is a React Native application that helps users find new job opportunit
 Here are some screenshots showcasing the main features of JobFusion:
 
 1. Home Screen
-   ![Home Screen](path/to/home_screen.png)
-   *Description of the home screen and its features*
+   ![Home Screen](showcase/image (1).png)
+   *Home page*
 
 2. Search Results
-   ![Search Results](path/to/search_results.png)
-   *Description of the search results screen*
+   ![Search Results](showcase/image (2).png)
+   *Search Page*
 
 3. Job Details
-   ![Job Details](path/to/job_details.png)
-   *Description of the job details screen*
+   ![Job Details](showcase/image.png)
+   *Job details Page*
 
 ## Prerequisites
 
