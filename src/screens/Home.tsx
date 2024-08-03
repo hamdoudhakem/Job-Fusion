@@ -1,5 +1,11 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import React, { useRef, useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  RefreshControl,
+} from "react-native";
 import { COLORS, icons, images, SIZES } from "../constants";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ParamListBase } from "@react-navigation/native";
@@ -16,10 +22,27 @@ export default function Home({
   navigation: NativeStackNavigationProp<ParamListBase>;
 }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
+  const popularJobsRef = useRef<any>();
+  const nearbyJobsRef = useRef<any>();
+
+  const OnRefresh = () => {
+    setRefreshing(true);
+    popularJobsRef.current?.refetch();
+    nearbyJobsRef.current?.refetch();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={OnRefresh} />
+        }
+      >
         <View style={{ flex: 1, padding: SIZES.medium }}>
           <Welcome
             searchTerm={searchTerm}
@@ -30,8 +53,8 @@ export default function Home({
               }
             }}
           />
-          <Popularjobs />
-          <Nearbyjobs />
+          <Popularjobs ref={popularJobsRef} />
+          <Nearbyjobs ref={nearbyJobsRef} />
         </View>
       </ScrollView>
     </View>

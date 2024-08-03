@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  ForwardRefRenderFunction,
+} from "react";
 import {
   View,
   Text,
@@ -13,13 +18,15 @@ import { COLORS, SIZES } from "../../../constants";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import { rapidApiData, useFetch } from "../../../hooks/useFetch";
 
-const Popularjobs = () => {
+const Popularjobs = forwardRef((props, ref) => {
   const navigation: NativeStackNavigationProp<ParamListBase> = useNavigation();
 
   const { data, isLoading, error, refetch } = useFetch("search", {
     query: "react developer",
     num_pages: 1,
   });
+
+  useImperativeHandle(ref, () => ({ refetch }));
 
   const [selectedJob, setSelectedJob] = useState("");
 
@@ -61,6 +68,6 @@ const Popularjobs = () => {
       </View>
     </View>
   );
-};
+});
 
 export default Popularjobs;

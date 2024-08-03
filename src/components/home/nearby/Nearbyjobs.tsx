@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef, useImperativeHandle } from "react";
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import { COLORS } from "../../../constants";
 import NearbyJobCard from "../../common/cards/nearby/NearbyJobCard";
 import { useFetch } from "../../../hooks/useFetch";
 
-const Popularjobs = () => {
+const Popularjobs = forwardRef((props, ref) => {
   const navigation: NativeStackNavigationProp<ParamListBase> = useNavigation();
 
   const { data, isLoading, error, refetch } = useFetch("search", {
@@ -22,6 +22,8 @@ const Popularjobs = () => {
     date_posted: "all",
     page: "1",
   });
+
+  useImperativeHandle(ref, () => ({ refetch }));
 
   return (
     <View style={styles.container}>
@@ -51,6 +53,6 @@ const Popularjobs = () => {
       </View>
     </View>
   );
-};
+});
 
 export default Popularjobs;
