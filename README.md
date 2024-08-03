@@ -2,8 +2,6 @@
 
 JobFusion is a React Native application that helps users find new job opportunities. It utilizes the JSearch API from RapidAPI to aggregate job listings from popular job-seeking sites like LinkedIn, Glassdoor, and others.
 
-![JobFusion App Screenshot](path/to/screenshot1.png)
-
 ## Features
 
 - **Job Aggregation**: Fetches job listings from multiple popular job-seeking sites.
@@ -15,16 +13,16 @@ JobFusion is a React Native application that helps users find new job opportunit
 
 Here are some screenshots showcasing the main features of JobFusion:
 
-1. Home Screen
-   ![Home Screen](showcase/image (1).png)
+![Home Screen](showcase/home.png)
+
    *Home page*
 
-2. Search Results
-   ![Search Results](showcase/image (2).png)
-   *Search Page*
+2.
+   ![Search Results](showcase/search2.png)
+   *Search Results Page*
 
-3. Job Details
-   ![Job Details](showcase/image.png)
+3.
+   ![Job Details](showcase/jobdetails.png)
    *Job details Page*
 
 ## Prerequisites
