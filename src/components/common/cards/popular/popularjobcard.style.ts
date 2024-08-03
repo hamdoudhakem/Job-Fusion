@@ -44,11 +44,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
   } as ViewStyle,
-  publisher: (selectedJob: string, item: JobItem): TextStyle => ({
-    fontSize: SIZES.medium - 2,
-    fontFamily: FONT.bold,
-    color: selectedJob === item.job_id ? COLORS.white : COLORS.primary,
-  }),
   location: {
     fontSize: SIZES.medium - 2,
     fontFamily: FONT.regular,

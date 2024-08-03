@@ -18,10 +18,8 @@ import {
 } from "../components";
 import { useFetch } from "../hooks/useFetch";
 import { COLORS, icons, SIZES } from "../constants";
-
-type RootStackParamList = {
-  JobDetails: { id: string };
-};
+import { ParamListBase } from "@react-navigation/native";
+import { RootStackParamList } from "../constants/types";
 
 type JobDetailsProps = NativeStackScreenProps<RootStackParamList, "JobDetails">;
 
@@ -31,7 +29,11 @@ const JobDetails = ({ navigation, route }: JobDetailsProps) => {
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  const onRefreshControl = () => {};
+  const onRefreshControl = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
 
   useEffect(() => {
     navigation.setOptions({
@@ -85,7 +87,7 @@ const JobDetails = ({ navigation, route }: JobDetailsProps) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
+    <View style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         refreshControl={
@@ -122,10 +124,13 @@ const JobDetails = ({ navigation, route }: JobDetailsProps) => {
 
       <JobFooter
         url={
-          data[0].job_google_link ?? "https://careers.google.com/jobs/results"
+          data[0]
+            ? data[0].job_apply_link ??
+              "https://careers.google.com/jobs/results"
+            : "https://careers.google.com/jobs/results"
         }
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -4,9 +4,10 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./popularjobcard.style";
 import { COLORS } from "../../../../constants";
 import { checkImageURL } from "../../../../utils";
+import { rapidApiData } from "../../../../hooks/useFetch";
 
 type PopularJobCardProps = {
-  item: any;
+  item: rapidApiData;
   selectedJob?: string;
   handleCardPress?: (item: any) => void;
 };

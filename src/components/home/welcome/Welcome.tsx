@@ -14,7 +14,15 @@ import { COLORS, icons, SIZES } from "../../../constants";
 
 const JobStypes = ["Full-time", "Part-time", "Contractor"];
 
-const Welcome = () => {
+const Welcome = ({
+  searchTerm,
+  setSearchTerm,
+  handlePress,
+}: {
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
+  handlePress: () => void;
+}) => {
   const [activeJobType, setActiveJobType] = useState("Full-time");
 
   const navigation: NativeStackNavigationProp<ParamListBase> = useNavigation();
@@ -30,13 +38,13 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput
             style={styles.searchInput}
-            value=""
-            onChange={() => null}
+            value={searchTerm}
+            onChangeText={(e) => setSearchTerm(e)}
             placeholder="What are you looking for"
           />
         </View>
 
-        <TouchableOpacity style={styles.searchBtn} onPress={() => {}}>
+        <TouchableOpacity style={styles.searchBtn} onPress={handlePress}>
           <Image
             source={icons.search}
             resizeMode="contain"
@@ -51,6 +59,7 @@ const Welcome = () => {
           keyExtractor={(item) => item}
           contentContainerStyle={{ columnGap: SIZES.small }}
           horizontal
+          keyboardShouldPersistTaps="handled"
           renderItem={({ item }) => (
             <TouchableOpacity
               style={[
@@ -62,7 +71,7 @@ const Welcome = () => {
               ]}
               onPress={() => {
                 setActiveJobType(item);
-                navigation.navigate(`/search/${item}`, { jobType: item });
+                navigation.push(`Search`, { searchTerm: item });
               }}
             >
               <Text

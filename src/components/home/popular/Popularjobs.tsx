@@ -11,7 +11,7 @@ import { ParamListBase, useNavigation } from "@react-navigation/native";
 import styles from "./popularjobs.style";
 import { COLORS, SIZES } from "../../../constants";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
-import { useFetch } from "../../../hooks/useFetch";
+import { rapidApiData, useFetch } from "../../../hooks/useFetch";
 
 const Popularjobs = () => {
   const navigation: NativeStackNavigationProp<ParamListBase> = useNavigation();
@@ -20,6 +20,13 @@ const Popularjobs = () => {
     query: "react developer",
     num_pages: 1,
   });
+
+  const [selectedJob, setSelectedJob] = useState("");
+
+  const handleCardPress = (job: rapidApiData) => {
+    navigation.push("JobDetails", { id: job.job_id });
+    setSelectedJob(job.job_id);
+  };
 
   return (
     <View style={styles.container}>
@@ -38,11 +45,17 @@ const Popularjobs = () => {
         ) : (
           <FlatList
             data={data}
-            // keyExtractor={(item) => item?.job_id}
+            keyExtractor={(item) => item.job_id}
             contentContainerStyle={{ columnGap: SIZES.small }}
             showsHorizontalScrollIndicator={false}
             horizontal
-            renderItem={({ item }) => <PopularJobCard item={item} />}
+            renderItem={({ item }) => (
+              <PopularJobCard
+                item={item}
+                selectedJob={selectedJob}
+                handleCardPress={handleCardPress}
+              />
+            )}
           />
         )}
       </View>

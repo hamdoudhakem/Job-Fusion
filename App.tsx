@@ -9,11 +9,11 @@ import { ScreenHeaderBtn } from "./src/components";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { ActivityIndicator, Text } from "react-native";
+import { RootStackParamList } from "./src/constants/types";
 
 SplashScreen.preventAutoHideAsync();
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -30,7 +30,7 @@ export default function App() {
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
-    return <ActivityIndicator size={"large"} color={"purple"} />;
+    return null;
   }
 
   return (
@@ -53,7 +53,15 @@ export default function App() {
               headerTitle: () => "",
             }}
           />
-          <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen
+            name="Search"
+            component={Search}
+            options={{
+              headerStyle: { backgroundColor: COLORS.lightWhite },
+              headerShadowVisible: false,
+              headerTitle: "",
+            }}
+          />
           <Stack.Screen name="JobDetails" component={JobDetails} />
         </Stack.Navigator>
       </NavigationContainer>

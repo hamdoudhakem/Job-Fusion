@@ -5,7 +5,7 @@ import { RAPID_API_KEY } from "@env";
 const rapidApiKey = RAPID_API_KEY;
 
 export type rapidApiData = {
-  job_google_link: string;
+  job_apply_link: string;
   job_highlights: any;
   job_employment_type: string;
   employer_name: string;
@@ -51,12 +51,12 @@ export const useFetch = (endpoint: string, params: rapidApiRequestParams) => {
     setIsLoading(true);
 
     try {
-      // const response = await axios.request(options);
+      const response = await axios.request(options);
       // console.log(
       //   "##################### Data ####################\n\n",
       //   response.data
       // );
-      setData(/*response.data.data*/ []);
+      setData(response.data.data);
     } catch (error) {
       setError(error);
     } finally {
