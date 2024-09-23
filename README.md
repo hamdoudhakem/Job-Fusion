@@ -7,7 +7,7 @@ JobFusion is a React Native application that helps users find new job opportunit
 - **Job Aggregation**: Fetches job listings from multiple popular job-seeking sites.
 - **Search Functionality**: Allows users to search for specific job listings.
 - **Easy Application**: Redirects users to the respective job listing site to apply.
-- **User Authentifciation**: Authentificating users using Relay and GraphQL along the Hasura Platform.
+- **User Authentification**: Authentificating users using Relay and GraphQL along the Hasura Platform.
 - **User-Friendly Interface**: Simple and intuitive design for a seamless job-seeking experience.
 
 ## Screenshots
