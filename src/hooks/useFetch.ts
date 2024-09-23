@@ -51,12 +51,13 @@ export const useFetch = (endpoint: string, params: rapidApiRequestParams) => {
     setIsLoading(true);
 
     try {
+      // const response = null;
       const response = await axios.request(options);
       // console.log(
       //   "##################### Data ####################\n\n",
       //   response.data
       // );
-      setData(response.data.data);
+      setData(response?.data.data);
     } catch (error) {
       setError(error);
     } finally {

@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     shadowColor: COLORS.white,
   },
   btnText: {
-    fontFamily: "DMMedium",
+    fontFamily: "medium",
     fontSize: SIZES.small,
   },
 });

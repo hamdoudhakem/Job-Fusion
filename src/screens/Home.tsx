@@ -1,30 +1,60 @@
-import React, { useRef, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  ScrollView,
-  RefreshControl,
-} from "react-native";
-import { COLORS, icons, images, SIZES } from "../constants";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { ParamListBase } from "@react-navigation/native";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { View, ScrollView, RefreshControl, BackHandler } from "react-native";
+import { COLORS, icons, SIZES } from "../constants";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   Nearbyjobs,
   Popularjobs,
   ScreenHeaderBtn,
+  ScreenHeaderProfileBtn,
   Welcome,
 } from "../components";
+import { RootStackParamList } from "../constants/types";
 
 export default function Home({
   navigation,
-}: {
-  navigation: NativeStackNavigationProp<ParamListBase>;
-}) {
+  route
+}: NativeStackScreenProps<RootStackParamList, "Home">) {
   const [searchTerm, setSearchTerm] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const popularJobsRef = useRef<any>();
   const nearbyJobsRef = useRef<any>();
+
+  const { username, email, password } = route.params.user;
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <ScreenHeaderBtn 
+          iconUrl={icons.exit} 
+          dimension="60%" 
+          disableBorderRadius={true}
+          handlePress={async () => {
+            await AsyncStorage.removeItem("user")
+            navigation.navigate("Sign In")
+          }}
+        />
+      ),
+      headerRight: () => (
+        <ScreenHeaderProfileBtn 
+          initial={username[0]}
+        />
+      ),
+    })
+  }, [])
+
+  useFocusEffect(
+    useCallback(() => {      
+      // Disable back button
+      const backPress = BackHandler.addEventListener("hardwareBackPress", () => {return true})
+
+      return () => {
+        backPress.remove()
+      }
+    }, [])
+  )
 
   const OnRefresh = () => {
     setRefreshing(true);
@@ -52,6 +82,7 @@ export default function Home({
                 navigation.push(`Search`, { searchTerm: searchTerm });
               }
             }}
+            user={{ username, email, password }}
           />
           <Popularjobs ref={popularJobsRef} />
           <Nearbyjobs ref={nearbyJobsRef} />

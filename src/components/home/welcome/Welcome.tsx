@@ -18,10 +18,12 @@ const Welcome = ({
   searchTerm,
   setSearchTerm,
   handlePress,
+  user,
 }: {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
   handlePress: () => void;
+  user: { username: string; email: string; password: string };
 }) => {
   const [activeJobType, setActiveJobType] = useState("Full-time");
 
@@ -30,7 +32,7 @@ const Welcome = ({
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello Hakem</Text>
+        <Text style={styles.userName}>Hello {user.username}</Text>
         <Text style={styles.welcomeMessage}>Find Job</Text>
       </View>
 

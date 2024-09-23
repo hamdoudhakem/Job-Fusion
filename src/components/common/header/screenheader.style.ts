@@ -10,12 +10,19 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.small / 1.25,
     justifyContent: "center",
     alignItems: "center",
+  },  
+  ProfileBtnContainer:{
+    width: 40,
+    height: 40,
+    backgroundColor: COLORS.beige,
+    borderRadius: SIZES.small / 1.25,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  // btnImg: (dimension: number): ImageStyle => ({
-  //   width: dimension,
-  //   height: dimension,
-  //   borderRadius: SIZES.small / 1.25,
-  // }),
+  InitialsText:{
+    fontFamily: 'bold',
+    fontSize: 20,
+  }
 });
 
 export default styles;

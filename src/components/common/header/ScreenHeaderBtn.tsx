@@ -7,17 +7,21 @@ const ScreenHeaderBtn = ({
   iconUrl,
   dimension,
   handlePress,
+  disableBorderRadius,
 }: {
   iconUrl: any;
   dimension: string;
+  disableBorderRadius?: boolean;
   handlePress?: () => void;
 }) => {
+
+  
   return (
     <TouchableOpacity style={styles.btnContainer} onPress={handlePress}>
       <Image
         source={iconUrl}
         style={{
-          borderRadius: SIZES.small / 1.25,
+          borderRadius: disableBorderRadius ? 0 : SIZES.small / 1.25,
           width: dimension as DimensionValue,
           height: dimension as DimensionValue,
         }}

@@ -8,12 +8,16 @@ const COLORS = {
 
   white: "#F3F4F8",
   lightWhite: "#FAFAFC",
+
+  blue: '#0000FA',
+
+  beige: '#ececdc'
 };
 
 const FONT = {
-  regular: "DMRegular",
-  medium: "DMMedium",
-  bold: "DMBold",
+  regular: "regular",
+  medium: "medium",
+  bold: "bold",
 };
 
 const SIZES = {
