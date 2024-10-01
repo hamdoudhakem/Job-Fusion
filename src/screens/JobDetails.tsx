@@ -19,7 +19,7 @@ import {
 import { useFetch } from "../hooks/useFetch";
 import { COLORS, icons, SIZES } from "../constants";
 import { ParamListBase } from "@react-navigation/native";
-import { RootStackParamList } from "../constants/types";
+import { RootStackParamList } from "../constants";
 
 type JobDetailsProps = NativeStackScreenProps<RootStackParamList, "JobDetails">;
 

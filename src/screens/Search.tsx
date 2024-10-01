@@ -12,7 +12,7 @@ import { ScreenHeaderBtn, NearbyJobCard } from "../components";
 import { COLORS, icons, SIZES } from "../constants";
 import styles from "../styles/search";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../constants/types";
+import { RootStackParamList } from "../constants";
 import { rapidApiData, useFetch } from "../hooks/useFetch";
 import { RAPID_API_KEY } from "@env";
 

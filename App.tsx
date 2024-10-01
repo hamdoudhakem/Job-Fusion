@@ -11,7 +11,7 @@ import { ScreenHeaderBtn, ScreenHeaderProfileBtn } from "./src/components";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { RootStackParamList } from "./src/constants/types";
+import { RootStackParamList } from "./src/constants";
 
 SplashScreen.preventAutoHideAsync();
 

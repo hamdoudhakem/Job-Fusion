@@ -6,7 +6,6 @@ import { styles } from '../styles/SignPagesStyles'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ParamListBase } from '@react-navigation/native'
 import { Field } from '../components/SignPages/Field'
-import { signInHasura } from '../hooks/useHasura'
 import { useSignIn } from '../hooks/useSignIn'
 
 const SignUp = ({

@@ -5,3 +5,11 @@ export interface RootStackParamList extends ParamListBase {
   JobDetails: { id: string };
   Search: { searchTerm: string };
 }
+
+export enum SignResponses {
+  Success = 'success',
+  AlreadyExists = 'Already Exists',
+  Error= 'error',
+  UserDoesNotExist = 'User Does Not Exist',
+  IncorrectPassword = 'Incorrect Password'
+}

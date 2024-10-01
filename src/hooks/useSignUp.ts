@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
-import { signUpHasura, SignResponses } from './useHasura'
+import { SignResponses } from '../constants'
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -41,10 +41,9 @@ export const useSignUp = () => {
       return;
     }
     
-    const result = await signUpHasura(username, email, password)
+    const result = {status: null, user: null}
 
     if(result.status === SignResponses.Success){
-      await AsyncStorage.setItem("user", JSON.stringify(result.user))
       navigation.navigate("Home", {user: result.user})
     }else if (result.status === SignResponses.AlreadyExists){
       setEmailError("Email already exists")

@@ -11,7 +11,7 @@ import {
   ScreenHeaderProfileBtn,
   Welcome,
 } from "../components";
-import { RootStackParamList } from "../constants/types";
+import { RootStackParamList } from "../constants";
 
 export default function Home({
   navigation,
