@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import { COLORS } from '../constants'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from '../styles/SignPagesStyles'
@@ -27,7 +27,11 @@ const SignUp = ({
   
   //Don't show the screen until we know if the user is logged in or not
   if(loadingUser){
-    return null
+    return (
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator size={'large'} color={'blue'} />
+      </View>
+    )
   }
 
   return (

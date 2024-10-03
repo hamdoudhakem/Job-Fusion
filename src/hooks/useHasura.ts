@@ -1,6 +1,7 @@
+import { Alert } from "react-native";
 import { graphql, commitMutation, fetchQuery, Disposable  } from "react-relay";
 import { environment } from "../../relay/Environment";
-import { Alert } from "react-native";
+import SHA3 from 'crypto-js/sha3';
 import {useHasuragetUserByEmailQuery, useHasuragetUserByEmailQuery$data} from './__generated__/useHasuragetUserByEmailQuery.graphql'
 
 export enum SignResponses {
@@ -39,14 +40,15 @@ export const signUpHasura = async (
         }
       }
     `
-  
+    const hashedPassword = SHA3(password).toString()
+
     // Now we just call commitMutation with the appropriate parameters
     commitMutation(
       environment,
       {
         mutation,
         variables: {
-          userData: [{email, password, username}],
+          userData: [{email, password: hashedPassword, username}],
         },
       }
     );
@@ -66,8 +68,10 @@ export const signInHasura = async (email: string, password: string) => {
     return {status: SignResponses.UserDoesNotExist, user: null}
   }
 
+  const hashedPassword = SHA3(password).toString()
+
   //User exists and password is correct
-  if(user.users_connection.edges[0].node.password === password) {
+  if(user.users_connection.edges[0].node.password === hashedPassword) {
     return {status: SignResponses.Success, user: user.users_connection.edges[0].node}
   }
 

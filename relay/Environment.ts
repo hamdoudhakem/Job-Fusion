@@ -13,7 +13,8 @@ const fetchFn: FetchFunction = (params, variables) => {
     headers: {
       Accept: 'application/json',
       "Content-Type": "application/json",  
-      "x-hasura-admin-secret": "tmok8u8pioilw7HVmGV7UxsCh2PdwORkhJ0UwMcU60drIWEmV77ejvkBGTQAK7ln"
+      "x-hasura-admin-secret": "tmok8u8pioilw7HVmGV7UxsCh2PdwORkhJ0UwMcU60drIWEmV77ejvkBGTQAK7ln",
+      "x-hasura-role": "user"
     },
     body: JSON.stringify({
       query: params.text,
