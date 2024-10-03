@@ -2,6 +2,8 @@
 
 JobFusion is a React Native application that helps users find new job opportunities. It utilizes the JSearch API from RapidAPI to aggregate job listings from popular job-seeking sites like LinkedIn, Glassdoor, and others, while leveraging Relay and GraphQL to handle user authentification.
 
+**IMPORTANT**: While the main branch uses Relay and GraphQL the second branch uses `Clerk` for authentifciation instead.
+
 ## Features
 
 - **Job Aggregation**: Fetches job listings from multiple popular job-seeking sites.
