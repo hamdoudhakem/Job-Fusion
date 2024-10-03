@@ -51,7 +51,6 @@ export const useFetch = (endpoint: string, params: rapidApiRequestParams) => {
     setIsLoading(true);
 
     try {
-      // const response = null;
       const response = await axios.request(options);
       // console.log(
       //   "##################### Data ####################\n\n",

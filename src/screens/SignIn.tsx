@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native'
 import { COLORS } from '../constants'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from '../styles/SignPagesStyles'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { ParamListBase } from '@react-navigation/native'
 import { Field } from '../components/SignPages/Field'
-import { useSignIn } from '../hooks/useSignIn'
+import { useSignInPage } from '../hooks/useSignIn'
 
 const SignUp = ({
   navigation
@@ -16,17 +16,20 @@ const SignUp = ({
   const {
     email,
     setEmail,
-    emailError,
     password,
     setPassword,
-    passwordError,   
-    signIn,
+    error,   
+    signInPress,
     loadingUser
-  } = useSignIn()
+  } = useSignInPage()
   
   //Don't show the screen until we know if the user is logged in or not
   if(loadingUser){
-    return null
+    return (
+      <View style={{flex:1, justifyContent:'center', alignItems:'center'}}>
+        <ActivityIndicator size={'large'} color={'blue'} />
+      </View>
+    )
   }
 
   return (
@@ -42,10 +45,6 @@ const SignUp = ({
             setValue={setEmail} 
           />
 
-          {emailError && (
-            <Text style={styles.FieldError}>{emailError}</Text>
-          )}
-          
           <Field 
             text="Password" 
             placeholder="Enter your Password" 
@@ -54,13 +53,13 @@ const SignUp = ({
             isPassword={true} 
           />
 
-          {passwordError && (
-            <Text style={styles.FieldError}>{passwordError}</Text>
+          {error && (
+            <Text style={styles.FieldError}>{error}</Text>
           )}
           
           <TouchableOpacity 
             style={styles.SubmitButton} 
-            onPress={() => signIn(email, password)}
+            onPress={() => signInPress()}
           >
             <Text style={styles.SubmitText}>Submit</Text>
           </TouchableOpacity>

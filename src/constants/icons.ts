@@ -9,6 +9,8 @@ import location from "../../assets/icons/location.png";
 import chevronLeft from "../../assets/icons/chevron-left.png";
 import chevronRight from "../../assets/icons/chevron-right.png";
 import exit from "../../assets/icons/exit.png"
+import eye from "../../assets/icons/eye.png"
+import eyeHide from "../../assets/icons/eye-hide.png"
 
 export default {
   heart,
@@ -21,5 +23,7 @@ export default {
   location,
   chevronLeft,
   chevronRight,
-  exit
+  exit,
+  eye,
+  eyeHide
 };

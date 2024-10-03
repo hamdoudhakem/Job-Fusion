@@ -12,7 +12,7 @@ import { styles } from "../styles/SignPagesStyles";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { ParamListBase } from "@react-navigation/native";
 import { Field } from "../components/SignPages/Field";
-import { useSignUp } from "../hooks/useSignUp";
+import { useSignUpPage } from "../hooks/useSignUp";
 
 const SignUp = ({
   navigation,
@@ -24,15 +24,13 @@ const SignUp = ({
     setUsername,
     email,
     setEmail,
-    emailError,
     password,
     setPassword,
-    passwordError,
     confirmPassword,
     setConfirmPassword,
-    confirmPasswordError,
-    signUp,
-  } = useSignUp();
+    error,
+    signUpPress,
+  } = useSignUpPage();
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,16 +44,13 @@ const SignUp = ({
             value={username}
             setValue={setUsername}
           />
+          
           <Field
             text="Email"
             placeholder="Enter your Email"
             value={email}
             setValue={setEmail}
-          />
-
-          {emailError && (
-            <Text style={styles.FieldError}>{emailError}</Text>
-          )}          
+          />      
 
           <Field
             text="Password"
@@ -63,11 +58,7 @@ const SignUp = ({
             value={password}
             setValue={setPassword}
             isPassword={true}
-          />
-
-          {passwordError && (
-            <Text style={styles.FieldError}>{passwordError}</Text>
-          )}
+          /> 
 
           <Field
             text="Confirm Password"
@@ -77,14 +68,14 @@ const SignUp = ({
             isPassword={true}
           />
 
-          {confirmPasswordError && (
-            <Text style={styles.FieldError}>{confirmPasswordError}</Text>
+          {error && (
+            <Text style={styles.FieldError}>{error}</Text>
           )}
 
           <TouchableOpacity
             style={styles.SubmitButton}
             onPress={async () => {
-              signUp(username, email, password);
+              signUpPress(username, email, password);
             }}
           >
             <Text style={styles.SubmitText}>Submit</Text>

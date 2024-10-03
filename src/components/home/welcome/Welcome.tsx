@@ -23,7 +23,7 @@ const Welcome = ({
   searchTerm: string;
   setSearchTerm: (term: string) => void;
   handlePress: () => void;
-  user: { username: string; email: string; password: string };
+  user: { username: string; email: string };
 }) => {
   const [activeJobType, setActiveJobType] = useState("Full-time");
 

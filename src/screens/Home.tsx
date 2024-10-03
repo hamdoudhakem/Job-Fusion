@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { View, ScrollView, RefreshControl, BackHandler } from "react-native";
+import { View, ScrollView, RefreshControl, BackHandler, ActivityIndicator } from "react-native";
 import { COLORS, icons, SIZES } from "../constants";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useFocusEffect } from "@react-navigation/native";
 import {
@@ -12,6 +11,7 @@ import {
   Welcome,
 } from "../components";
 import { RootStackParamList } from "../constants";
+import { useAuth } from '@clerk/clerk-expo'
 
 export default function Home({
   navigation,
@@ -22,17 +22,19 @@ export default function Home({
   const popularJobsRef = useRef<any>();
   const nearbyJobsRef = useRef<any>();
 
-  const { username, email, password } = route.params.user;
+  const { username, email } = route.params.user;
 
-  useEffect(() => {
-    navigation.setOptions({
+  const { signOut } = useAuth()
+
+  useEffect(() => { 
+    navigation.setOptions({      
       headerLeft: () => (
         <ScreenHeaderBtn 
           iconUrl={icons.exit} 
           dimension="60%" 
           disableBorderRadius={true}
           handlePress={async () => {
-            await AsyncStorage.removeItem("user")
+            await signOut()
             navigation.navigate("Sign In")
           }}
         />
@@ -64,6 +66,7 @@ export default function Home({
       setRefreshing(false);
     }, 2000);
   };
+  
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -82,7 +85,7 @@ export default function Home({
                 navigation.push(`Search`, { searchTerm: searchTerm });
               }
             }}
-            user={{ username, email, password }}
+            user={{ username, email }}
           />
           <Popularjobs ref={popularJobsRef} />
           <Nearbyjobs ref={nearbyJobsRef} />

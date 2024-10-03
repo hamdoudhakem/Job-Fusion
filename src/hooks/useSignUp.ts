@@ -1,52 +1,50 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
-import { SignResponses } from '../constants'
 import { ParamListBase, useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useSignUp, isClerkAPIResponseError } from '@clerk/clerk-expo'
 
-export const useSignUp = () => {
+export const useSignUpPage = () => {
   const navigation = useNavigation<NativeStackNavigationProp<ParamListBase>>()
 
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
-  const [emailError, setEmailError] = useState('')
   const [password, setPassword] = useState('')
-  const [passwordError, setPasswordError] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-  const [confirmPasswordError, setConfirmPasswordError] = useState('')
+  const [error, setError] = useState('')
 
-  const signUp = async (username: string, email: string, password: string) => {
-    setEmailError('')
-    setPasswordError('')
-    setConfirmPasswordError('')
-
-    if(password.length < 8){
-      setPasswordError("Password must be at least 8 characters")
-      return;
-    }
-
+  const { isLoaded, setActive, signUp} = useSignUp()
+  
+  const signUpPress = async (username: string, email: string, password: string) => {
+    if (!isLoaded) {
+      return
+    }   
+    
     if(password !== confirmPassword){
-      setConfirmPasswordError("Passwords do not match")
-      return;
-    }
-
-    if(email.length === 0){
-      setEmailError("Email cannot be empty")
+      setError("Passwords do not match")
       return;
     }
 
     if(username.length === 0){
-      setEmailError("Username cannot be empty")
+      setError("Username cannot be empty")
       return;
-    }
-    
-    const result = {status: null, user: null}
+    }    
 
-    if(result.status === SignResponses.Success){
-      navigation.navigate("Home", {user: result.user})
-    }else if (result.status === SignResponses.AlreadyExists){
-      setEmailError("Email already exists")
+    try {
+      const signUpResponse = await signUp.create({
+        firstName: username.trim(),        
+        emailAddress: email.trim(),
+        password: password.trim(),
+      })
+            
+      await setActive({session: signUpResponse.createdSessionId})
+      navigation.navigate("Home", {user: {email, username}})
+
+      setError('')
+    } catch (err) {
+      if (isClerkAPIResponseError(err)){
+        setError(err.errors[0].longMessage ?? err.errors[0].message)
+      }
     }       
   }
   
@@ -55,13 +53,11 @@ export const useSignUp = () => {
     setUsername,
     email,
     setEmail,
-    emailError,
     password,
     setPassword,
-    passwordError,
     confirmPassword,
     setConfirmPassword,
-    confirmPasswordError,
-    signUp
+    error,
+    signUpPress
   }
 }
